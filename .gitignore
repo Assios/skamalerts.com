@@ -1,0 +1,4 @@
+*.db
+.idea
+.DS_Store
+keys.py
