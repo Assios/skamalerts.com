@@ -24,6 +24,20 @@ def fetch_emails_and_tokens():
     c.close()
     return all_rows
 
+def fetch_previous_skam_posts():
+    conn = sql.connect("database.db")
+    c = conn.cursor()
+    c.execute('SELECT * FROM posts')
+    all_rows = c.fetchall()
+    c.close()
+    return [row[0] for row in all_rows]
+
+def add_post(post):
+    con = sql.connect("database.db")
+    c = con.cursor()
+    c.execute("INSERT INTO posts (post) VALUES (?)", (post,))
+    con.commit()
+    con.close()
 
 class Post:
     def get_type(self, article):
@@ -55,18 +69,6 @@ class Post:
         except:
             self.title = ""
 
-def previous_posts():
-    with open("skam_posts.txt") as f_in:
-        lines = filter(None, (line.rstrip() for line in f_in))
-
-    return lines
-
-def add_post(post):
-    f = open("skam_posts.txt", "a")
-    f.write("\n")
-    f.write(post)
-    f.write("\n")
-
 def skam():
     emails_and_tokens = fetch_emails_and_tokens()
     r = urllib.urlopen('http://skam.p3.no').read()
@@ -80,7 +82,7 @@ def skam():
     else:
         last = posts[0]
 
-        if not last.original_time.lower() in previous_posts():
+        if not last.original_time.lower() in fetch_previous_skam_posts():
             add_post(last.original_time.lower())
 
             if last.type == "chat":
