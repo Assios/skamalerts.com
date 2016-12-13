@@ -81,9 +81,10 @@ def skam():
         print "EMPTY POSTS"
     else:
         last = posts[0]
+	_id = last.original_time.lower() + "_email"
 
-        if not last.original_time.lower() in fetch_previous_skam_posts():
-            add_post(last.original_time.lower())
+        if not last.original_time.lower() and not _id in fetch_previous_skam_posts():
+            add_post(_id)
 
             if last.type == "chat":
                 img_url = "<br><img src=\"%s\"/>" % last.img
