@@ -17,7 +17,7 @@ sys.setdefaultencoding('utf8')
 
 
 def fetch_emails_and_tokens():
-    conn = sql.connect("database.db")
+    conn = sql.connect("../database.db")
     c = conn.cursor()
     c.execute('SELECT * FROM emails')
     all_rows = c.fetchall()
@@ -25,7 +25,7 @@ def fetch_emails_and_tokens():
     return all_rows
 
 def fetch_previous_skam_posts():
-    conn = sql.connect("database.db")
+    conn = sql.connect("../database.db")
     c = conn.cursor()
     c.execute('SELECT * FROM posts')
     all_rows = c.fetchall()
@@ -33,7 +33,7 @@ def fetch_previous_skam_posts():
     return [row[0] for row in all_rows]
 
 def add_post(post):
-    con = sql.connect("database.db")
+    con = sql.connect("../database.db")
     c = con.cursor()
     c.execute("INSERT INTO posts (post) VALUES (?)", (post,))
     con.commit()
@@ -90,8 +90,7 @@ def skam():
             else:
                 img_url = ""
 
-            send_multiple_mailgun(emails_and_tokens, last.title, last.href, last.original_time, last.type,
-                                  img_url)
+            send_multiple_mailgun(emails_and_tokens, last.title, last.href, last.original_time, last.type, img_url)
             print emails_and_tokens
             print "EMAILS SENDT!"
         else:

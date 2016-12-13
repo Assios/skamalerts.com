@@ -13,7 +13,7 @@ def token():
 
 
 def verify_email_token_exists(email, token):
-    conn = sql.connect("database.db")
+    conn = sql.connect("../database.db")
     c = conn.cursor()
     c.execute('SELECT * FROM emails')
     rows = c.fetchall()
@@ -23,7 +23,7 @@ def verify_email_token_exists(email, token):
 
 
 def fetch_emails():
-    conn = sql.connect("database.db")
+    conn = sql.connect("../database.db")
     c = conn.cursor()
     c.execute('SELECT email FROM emails')
     rows = c.fetchall()
@@ -58,7 +58,7 @@ def unsub():
         token = request.form['token']
 
         if email and token and verify_email_token_exists(email, token):
-            c = sql.connect("database.db")
+            c = sql.connect("../database.db")
             c.execute("DELETE FROM emails WHERE email=? AND token=?", (email, token))
             c.commit()
             print "DELETED %s" % email
@@ -94,7 +94,7 @@ def send():
             email = request.form['email'].lower()
 
             if validate_email(email):
-                con = sql.connect("database.db")
+                con = sql.connect("../database.db")
                 cur = con.cursor()
 
                 cur.execute('SELECT * FROM emails')
