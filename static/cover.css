@@ -6,9 +6,10 @@
 a,
 a:focus,
 a:hover {
-  color: #000;
   font-weight: bold;
 }
+
+
 
 .fb-like.hidden-xs {
   margin-left: 295px;

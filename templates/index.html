@@ -66,7 +66,7 @@
               <h2 style="color:{{color}};">{{msg}}</h2>
             {%endif%}
             <p class="lead">Lei av å besøke Skam-siden uten at det har kommet noen oppdateringer? Skriv inn eposten din under, og vi sender deg en epost med en gang det kommer et nytt innlegg!</p>
-            <p class="lead">Send <b>SKAM</b> til <a href="sms:+4790300095?body=SKAM">90300095</a> for gratis SMS-varsler.</p>
+            <p class="lead">Send <b>SKAM</b> til <b>90300095</b> for gratis SMS-varsler.</p>
             <p class="lead">
               <form action="{{ url_for('send') }}" method="post" name="emailform">
                 <input type="text" class="form-control email-input" placeholder="Skriv inn epostadressen din her" name="email">
@@ -79,7 +79,7 @@
                 {% if share_button %}
 <div class="fb-like" data-href="https://skamalerts.com" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
                 {% endif %}
-              <p>Informasjonen din vil ikke bli delt med andre, og du kan når som helst melde deg av. Denne tjenesten er ikke tilknyttet NRK.</p>
+              <p>Av <a href="https://twitter.com/Assios" target="_blank">Assios</a>.<br>Informasjonen din vil ikke bli delt med andre, og du kan når som helst melde deg av.</p>
             </div>
           </div>
         </div>
