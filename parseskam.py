@@ -79,7 +79,6 @@ def skam():
     soup = BeautifulSoup(r, "html.parser")
     articles = soup.find_all("article", class_="post")
     posts = [Post(article) for article in articles]
-    print posts
 
     if not posts or len(posts) == 0:
         print "EMPTY POSTS"
@@ -87,7 +86,7 @@ def skam():
         last = posts[0]
         _id = last.original_time.lower() + "_email"
 
-        if not last.original_time.lower() and not _id in fetch_previous_skam_posts():
+        if not _id in fetch_previous_skam_posts():
             add_post(_id)
 
             if last.type == "chat":
@@ -96,10 +95,9 @@ def skam():
                 img_url = ""
 
             send_multiple_mailgun(emails_and_tokens, last.title, last.href, last.original_time, last.type, img_url)
-            print emails_and_tokens
             print "EMAILS SENDT!"
         else:
-            print last.original_time
+            print "Allerede sendt: " + last.original_time
 
     threading.Timer(10.0, skam).start()
 
